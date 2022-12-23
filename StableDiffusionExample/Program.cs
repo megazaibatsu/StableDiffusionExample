@@ -32,6 +32,13 @@ var txt2img = new TextToImageOptions
 
 var txt2img_file = await stableDiffusion.TextToImage(apiKey, model, txt2img);
 
+if (txt2img_file is not null && txt2img_file.Length > 0)
+{
+    var filename = txt2img.TextPrompts[0].Text.Replace(' ', '_');
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{filename}.png");
+    File.WriteAllBytes(filePath, txt2img_file);
+}
+
 // Image-to-Image
 var imageStrength = 0.4m;
 
@@ -58,5 +65,12 @@ var img2img = new ImageToImageOptions
 };
 
 var initImagePath = Path.Combine(Directory.GetCurrentDirectory(), $"../../../init_image.png");
-var initImage = System.IO.File.ReadAllBytes(initImagePath);
+var initImage = File.ReadAllBytes(initImagePath);
 var img2img_file = await stableDiffusion.ImageToImage(apiKey, model, img2img, initImage);
+
+if (img2img_file is not null && img2img_file.Length > 0)
+{
+    var filename = img2img.TextPrompts[0].Text.Replace(' ', '_');
+    var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{filename}.png");
+    File.WriteAllBytes(filePath, img2img_file);
+}

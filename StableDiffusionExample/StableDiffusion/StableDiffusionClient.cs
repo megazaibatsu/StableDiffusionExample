@@ -8,7 +8,7 @@ namespace StableDiffusionExample.StableDiffusion
 
     public class StableDiffusionClient
     {
-        public async Task<string> TextToImage(string apiKey, string model, TextToImageOptions txt2img)
+        public async Task<byte[]> TextToImage(string apiKey, string model, TextToImageOptions txt2img)
         {
             try
             {
@@ -40,11 +40,7 @@ namespace StableDiffusionExample.StableDiffusion
                                 data = memoryStream.ToArray();
                             }
 
-                            var filename = txt2img.TextPrompts[0].Text.Replace(' ', '_');
-                            var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{filename}.png");
-                            File.WriteAllBytes(filePath, data);
-
-                            return filePath;
+                            return data;
                         }
                     }
                 }
@@ -57,7 +53,7 @@ namespace StableDiffusionExample.StableDiffusion
             return null;
         }
 
-        public async Task<string> ImageToImage(string apiKey, string model, ImageToImageOptions img2img, byte[] image)
+        public async Task<byte[]> ImageToImage(string apiKey, string model, ImageToImageOptions img2img, byte[] image)
         {
             try
             {
@@ -99,11 +95,7 @@ namespace StableDiffusionExample.StableDiffusion
                                     data = memoryStream.ToArray();
                                 }
 
-                                var filename = img2img.TextPrompts[0].Text.Replace(' ', '_');
-                                var filePath = Path.Combine(Directory.GetCurrentDirectory(), $"{filename}.png");
-                                File.WriteAllBytes(filePath, data);
-
-                                return filePath;
+                                return data;
                             }
                         }
                     }
