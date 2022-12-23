@@ -18,10 +18,10 @@ namespace StableDiffusionExample.StableDiffusion
                 var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url)
                 {
                     Headers =
-                {
-                    { HeaderNames.Accept, "image/png" },
-                    { HeaderNames.Authorization, apiKey }
-                },
+                    {
+                        { HeaderNames.Accept, "image/png" },
+                        { HeaderNames.Authorization, apiKey }
+                    },
                     Content = content
                 };
 
@@ -65,18 +65,18 @@ namespace StableDiffusionExample.StableDiffusion
                     var imageStreamContent = new StreamContent(buffer);
 
                     var formContent = new MultipartFormDataContent
-                {
-                    { optionsContent, "options" },
-                    { imageStreamContent, "init_image" }
-                };
+                    {
+                        { optionsContent, "options" },
+                        { imageStreamContent, "init_image" }
+                    };
 
                     var httpRequestMessage = new HttpRequestMessage(HttpMethod.Post, url)
                     {
                         Headers =
-                    {
-                        { HeaderNames.Accept, "image/png" },
-                        { HeaderNames.Authorization, apiKey }
-                    },
+                        {
+                            { HeaderNames.Accept, "image/png" },
+                            { HeaderNames.Authorization, apiKey }
+                        },
                         Content = formContent
                     };
 
