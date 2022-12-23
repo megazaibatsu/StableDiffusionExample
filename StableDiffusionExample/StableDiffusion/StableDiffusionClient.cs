@@ -109,13 +109,14 @@ namespace StableDiffusionExample.StableDiffusion
             return null;
         }
 
+        // See: https://github.com/Stability-AI/stability-sdk/issues/70
         public static decimal CalculateStartSchedule(decimal imageStrength)
         {
-            if (imageStrength < 0.05m)
-                imageStrength = 0.05m;
+            if (imageStrength < 0m)
+                imageStrength = 0m;
 
-            if (imageStrength > 1)
-                imageStrength = 1;
+            if (imageStrength > 0.95m)
+                imageStrength = 0.95m;
 
             var startSchedule = 1 - imageStrength;
             return startSchedule;
